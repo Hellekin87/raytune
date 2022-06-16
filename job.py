@@ -2,7 +2,7 @@
 
 import argparse
 import time
-import tensorflow as tf
+
 
 import ray
 from ray import tune
@@ -10,6 +10,7 @@ from ray.tune.schedulers import AsyncHyperBandScheduler
 
 
 def evaluation_fn(step, width, height):
+    import tensorflow as tf
     time.sleep(0.1)
     return (0.1 + width * step / 100) ** (-1) + height * 0.1
 
