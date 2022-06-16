@@ -2,6 +2,7 @@
 
 import argparse
 import time
+import tensorflow as tf
 
 import ray
 from ray import tune
@@ -42,11 +43,14 @@ if __name__ == "__main__":
         help="The address of server to connect to if using Ray Client.",
     )
     args, _ = parser.parse_known_args()
+    # install packages
+    runtime_env = {"pip": ["tensorflow"]}
+    
     if args.server_address is not None:
         print("using ray server address:", args.server_address)
-        ray.init(f"ray://{args.server_address}")
+        ray.init(f"ray://{args.server_address}", runtime_env=runtime_env)
     else:
-        ray.init(address=args.ray_address)
+        ray.init(address=args.ray_address, runtime_env=runtime_env)
 
 
     # AsyncHyperBand enables aggressive early stopping of bad trials.
