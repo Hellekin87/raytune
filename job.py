@@ -48,9 +48,10 @@ if __name__ == "__main__":
     
     if args.server_address is not None:
         print("using ray server address:", args.server_address)
-        ray.init(f"ray://{args.server_address}", runtime_env=runtime_env)
+        #ray.init(f"ray://{args.server_address}", runtime_env=runtime_env)
+        ray.init(f"ray://{args.server_address}")
     else:
-        ray.init(address=args.ray_address, runtime_env=runtime_env)
+        ray.init(address=args.ray_address)
 
 
     # AsyncHyperBand enables aggressive early stopping of bad trials.
