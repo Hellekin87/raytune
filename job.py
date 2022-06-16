@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 
-import tensorflow as tf
-import keras
-import pandas as pd
-import sklearn
-
 import argparse
 import time
 
