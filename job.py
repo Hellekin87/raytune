@@ -2,6 +2,9 @@
 
 import argparse
 import time
+import pandas
+import tensorflow as tf
+import keras
 
 
 import ray
@@ -10,7 +13,6 @@ from ray.tune.schedulers import AsyncHyperBandScheduler
 
 
 def evaluation_fn(step, width, height):
-    import requests
     time.sleep(0.1)
     return (0.1 + width * step / 100) ** (-1) + height * 0.1
 
@@ -45,7 +47,7 @@ if __name__ == "__main__":
     )
     args, _ = parser.parse_known_args()
     # install packages
-    runtime_env = {"pip": ["requests"]}
+    # runtime_env = {"pip": ["requests"]}
     
     if args.server_address is not None:
         print("using ray server address:", args.server_address)
