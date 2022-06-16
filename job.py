@@ -10,7 +10,7 @@ from ray.tune.schedulers import AsyncHyperBandScheduler
 
 
 def evaluation_fn(step, width, height):
-    import tensorflow as tf
+    import requests
     time.sleep(0.1)
     return (0.1 + width * step / 100) ** (-1) + height * 0.1
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     )
     args, _ = parser.parse_known_args()
     # install packages
-    runtime_env = {"pip": ["tensorflow"]}
+    runtime_env = {"pip": ["requests"]}
     
     if args.server_address is not None:
         print("using ray server address:", args.server_address)
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         mode="min",
         scheduler=scheduler,
         stop=stopping_criteria,
-        num_samples=20,
+        num_samples=5,
         verbose=1,
         resources_per_trial={"cpu": 1, "gpu": 0},
         config={  # Hyperparameter space
